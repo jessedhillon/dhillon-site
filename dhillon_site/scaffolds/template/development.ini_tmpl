@@ -22,7 +22,7 @@ jinja2.filters =
 jinja2.autoescape = False
 jinja2.cache_size = 0
 
-scss.path = foobar:assets/scss
+scss.path = {{project}}:assets/scss
 
 [server:main]
 use = egg:waitress#main
