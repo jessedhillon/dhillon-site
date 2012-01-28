@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" type="text/css" href="{{ 'css' | route_url(stylesheet='style') }}"/>
+        {% block style %}{% endblock style %}
+
+        <script type="text/javascript">
+var Router = (function(route_name, values) {
+    var re = /\{([A-Za-z_]+)\}/g;
+    var routes = {
+        'object_view': '/objects/{object_id}/view.json',
+    };
+
+    return function(name, vars) {
+        return routes[name].replace(re, function(match, key) {
+            return vars[key];
+        });
+    }
+})();
+        </script>
+        {% block script %}{% endblock script %}
+    </head>
+
+    <body>
+        {% block content %}
+        {% endblock content %}
+    </body>
+</html>
