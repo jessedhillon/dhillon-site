@@ -51,3 +51,18 @@ def prefixed_keys(d, prefix):
 def parse_uri(s):
     uri_pattern = re.compile(r'^(?P<scheme>[A-Za-z]+)://(?P<username>[^:]+):(?P<password>[^@]*)@(?P<host>[^:]+):(?P<port>[0-9]+)(?P<urn>.*)')
     return re.match(uri_pattern, s).groupdict()
+
+def as_bool(s, default=False):
+    if s.lower() in ['true', 'yes', 'on', '1']:
+        return True
+
+    if s.lower() in ['false', 'no', 'off', '0']:
+        return False
+
+    return default
+
+def slug(value):
+    """https://code.djangoproject.com/browser/django/trunk/django/template/defaultfilters.py#L207"""
+    value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore')
+    value = unicode(re.sub('[^\w\s-]', '', value).strip().lower())
+    return mark_safe(re.sub('[-\s]+', '-', value))
