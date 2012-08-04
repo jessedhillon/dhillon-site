@@ -49,6 +49,16 @@ class MapperExtensionProxy(MapperExtension):
             return instance.reconstruct_instance()
 
 class MetaModel(DeclarativeMeta):
+    def __new__(metacls, name, bases, d):
+        if '__mapper_args__' not in d:
+            d = {}
+
+        d.get('__mapper_args__').update({
+            'extension': MapperExtensionProxy()
+        })
+
+        return type.__new__(name, bases, d)
+
     @metaproperty
     def query(cls):
         return Session.query(cls)

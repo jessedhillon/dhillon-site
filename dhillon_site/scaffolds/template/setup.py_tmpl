@@ -18,7 +18,7 @@ requires = [
     'pyramid_jinja2',
     'zope.sqlalchemy',
     'waitress',
-    'python-dateutil',
+    'python-dateutil<=2.0',
     'Dhillon-site',
 ]
 
